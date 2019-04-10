@@ -14,6 +14,24 @@ import (
 // IncompatibleFlags is a common substring of an error message
 const IncompatibleFlags = "cannot be used at the same time"
 
+// LogIntendedAction calls logger.Info with appropriate prefix
+func LogIntendedAction(dryRun bool, msgFmt string, args ...interface{}) {
+	prefix := "will "
+	if dryRun {
+		prefix = "(dry-run) would "
+	}
+	logger.Info(prefix+msgFmt, args...)
+}
+
+// LogCompletedAction calls logger.Success with appropriate prefix
+func LogCompletedAction(dryRun bool, msgFmt string, args ...interface{}) {
+	prefix := ""
+	if dryRun {
+		prefix = "(dry-run) would have "
+	}
+	logger.Success(prefix+msgFmt, args...)
+}
+
 // GetNameArg tests to ensure there is only 1 name argument
 func GetNameArg(args []string) string {
 	if len(args) > 1 {
