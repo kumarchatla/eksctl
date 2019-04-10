@@ -7,7 +7,8 @@ import (
 )
 
 var (
-	wait = false
+	wait   = false
+	dryRun = true
 )
 
 // Command will create the `delete` commands
